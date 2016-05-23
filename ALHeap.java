@@ -68,14 +68,26 @@ public class ALHeap {
     { 
 	_heap.add(addVal);
 	int index=_heap.size()-1;
-	if (index==-1) return;
+	if (index==0) return;
 	else {
-	    while (addVal.compareTo(_heap.get())){
-		
-	    }	    
+	    if (index%2==0)
+		{
+		    while (addVal.compareTo(_heap.get((index-2)/2))<0){
+			swap(index,_heap.get((index-2)/2));
+			index=_heap.get((index-2)/2);
+		    }
+		}
+	    else
+		{
+		    while (addVal.compareTo(_heap.get((index-1)/2))>0){
+			swap(index,_heap.get((index-1)/2));
+			index=_heap.get((index-1)/2);
+		    }
+		}
+	    
 	}
     } //O(?)
-
+    
 
 
     /*****************************************************
@@ -85,7 +97,7 @@ public class ALHeap {
      *****************************************************/
     public Integer removeMin() 
     {
-	_heap.remove(0);
+	return _heap.remove(0);
     }//O(?)
 
 
@@ -98,7 +110,7 @@ public class ALHeap {
      *****************************************************/
     private int minChildPos( int pos ) 
     {
-
+	return 0;
     }//O(?)
 
 
