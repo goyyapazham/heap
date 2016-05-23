@@ -79,12 +79,11 @@ public class ALHeap {
 		}
 	    else
 		{
-		    while (addVal.compareTo(_heap.get((index-1)/2))>0){
+		    while (addVal.compareTo(_heap.get((index-1)/2))<0){
 			swap(index,(index-1)/2);
 			index=((index-1)/2);
 		    }
 		}
-	    
 	}	
     } //O(?)
     
