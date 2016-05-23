@@ -66,26 +66,26 @@ public class ALHeap {
      *****************************************************/
     public void add( Integer addVal ) 
     { 
-	_heap.add(addVal);
+        _heap.add(addVal);
 	int index=_heap.size()-1;
 	if (index==0) return;
 	else {
 	    if (index%2==0)
 		{
 		    while (addVal.compareTo(_heap.get((index-2)/2))<0){
-			swap(index,_heap.get((index-2)/2));
-			index=_heap.get((index-2)/2);
+			swap(index,(index-2)/2);
+			index=((index-2)/2);
 		    }
 		}
 	    else
 		{
 		    while (addVal.compareTo(_heap.get((index-1)/2))>0){
-			swap(index,_heap.get((index-1)/2));
-			index=_heap.get((index-1)/2);
+			swap(index,(index-1)/2);
+			index=((index-1)/2);
 		    }
 		}
 	    
-	}
+	}	
     } //O(?)
     
 
@@ -136,7 +136,6 @@ public class ALHeap {
     //main method for testing
     public static void main( String[] args ) {
 
-	/*--V--------------MOVE ME DOWN------------------V---
 
 	  ALHeap pile = new ALHeap();
 
@@ -160,6 +159,7 @@ public class ALHeap {
 	  System.out.println(pile);
 	  pile.add(9);
 	  System.out.println(pile);
+	/*--V--------------MOVE ME DOWN------------------V---
 
 	  System.out.println("removing " + pile.removeMin() + "...");
 	  System.out.println(pile);
