@@ -96,40 +96,45 @@ public class ALHeap {
      *****************************************************/
     public Integer removeMin() 
     {
-	
+	//to be returned
 	Integer min = _heap.get(0);
 	swap(0, _heap.size()-1);
 	_heap.remove(_heap.size()-1);
 
+	//the thing you artificially implanted is now at the root
 	int i=0;
+	//while it has at least one child
 	while( 2*i+1<_heap.size() ) {
+	    //if it has two children
 	    if( 2*i+2<_heap.size() ) {
+		//find out the smaller of its children
 		int m = _heap.get(2*i+2);
 		int mi = 2*i+2;
 		if( _heap.get(2*i+1) < _heap.get(2*i+2) ) {
 		    m = _heap.get(2*i+1);
 		    mi--;
 		}
-		
+		//if it's bigger than its smaller child, swap them
 		if( _heap.get(i) > min ) {
 		    swap( mi, i );
 		    i=mi;
 		}
-		else {
-		    break;
-		}
+		//otherwise you're done
+		else break;
 	    }
+	    //if it only has the one child
 	    else {
+		//if it's bigger than its child, swap them
 		if( _heap.get(i) > _heap.get(2*i+1) ) {
 		    swap(i, 2*i+1);
 		    i=2*i+1;
 		}
-		else {
-		    break;
-		}
+		//otherwise you're done
+		else break;
 	    }
 	}
 
+	//you stored this way back to be returned
 	return min;
 	    
     }//O(?)
