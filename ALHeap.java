@@ -96,6 +96,7 @@ public class ALHeap {
      *****************************************************/
     public Integer removeMin() 
     {
+	
 	Integer min = _heap.get(0);
 	swap(0, _heap.size()-1);
 	_heap.remove(_heap.size()-1);
