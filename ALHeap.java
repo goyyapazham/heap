@@ -1,3 +1,11 @@
+/*
+  Team Top Qual Memes -- Janet Zhang, Nalanda Sharadjaya, Richard Lin
+  APCS2 pd5
+  hw43 -- Heap of Trouble
+  2016-05-23
+*/
+
+
 /*****************************************************
  * class ALHeap
  * Implements a min heap using an ArrayList as underlying container
@@ -32,7 +40,7 @@ public class ALHeap {
 	for(int n:_heap)
 	    s+=n;
 	return s;
-    }//O(?)
+    }//O(n)
 
 
 
@@ -43,7 +51,7 @@ public class ALHeap {
     public boolean isEmpty() 
     { 
 	return _heap.isEmpty(); 
-    } //O(?)
+    } //O(1)
 
 
 
@@ -55,7 +63,7 @@ public class ALHeap {
     public Integer peekMin() 
     { 
 	return _heap.get(0);
-    } //O(?)
+    } //O(1)
 
 
 
@@ -85,7 +93,7 @@ public class ALHeap {
 		    }
 		}
 	}	
-    } //O(?)
+    } //O(n)
     
 
 
@@ -105,52 +113,62 @@ public class ALHeap {
 	int i=0;
 	//while it has at least one child
 	while( 2*i+1<_heap.size() ) {
-	    //if it has two children
-	    if( 2*i+2<_heap.size() ) {
-		//find out the smaller of its children
-		int m = _heap.get(2*i+2);
-		int mi = 2*i+2;
-		if( _heap.get(2*i+1) < _heap.get(2*i+2) ) {
-		    m = _heap.get(2*i+1);
-		    mi--;
-		}
-		//if it's bigger than its smaller child, swap them
-		if( _heap.get(i) > min ) {
-		    swap( mi, i );
-		    i=mi;
-		}
-		//otherwise you're done
-		else break;
+
+	    //find the smaller child's index
+	    int minInd = minChildPos(i);	   
+	        
+	    //if it's bigger than its smaller child, swap them
+	    if( _heap.get(i) > _heap.get(minInd) ) {
+		swap( minInd, i );
+		i=minInd;
 	    }
-	    //if it only has the one child
-	    else {
-		//if it's bigger than its child, swap them
-		if( _heap.get(i) > _heap.get(2*i+1) ) {
-		    swap(i, 2*i+1);
-		    i=2*i+1;
-		}
-		//otherwise you're done
-		else break;
-	    }
+	    
+	    //otherwise you're done
+	    else break;
+
 	}
 
 	//you stored this way back to be returned
 	return min;
 	    
-    }//O(?)
+    }//O(n)
 
 
 
     /*****************************************************
      * minChildPos(int)  ---  helper fxn for removeMin()
+     *NOTE: UNUSED SINCE THIS WAS WRITTEN AFTER REMOVEMIN WAS WRITTEN
      * Returns index of least child, or 
      * -1 if no children, or if input pos is not in ArrayList
      * Postcondition: Tree unchanged
      *****************************************************/
     private int minChildPos( int pos ) 
     {
-	return 0;
-    }//O(?)
+	int min = 2*pos+2;
+
+	if (pos > _heap.size()) {
+	    min = -1;
+	}
+
+	else if (2*pos+2 == _heap.size()) {
+	    min = 2*pos+1;
+	}
+	
+	else if (2*pos+2 < _heap.size()) {
+	    //find out the smaller of its children
+	    
+	    if( _heap.get(2*pos+1) < _heap.get(2*pos+2) ) {
+		min--;
+	    }
+
+	}
+
+	else {
+	    min = -1;
+	}
+
+	return min;
+    } //O(1)
 
 
 
