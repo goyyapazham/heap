@@ -96,7 +96,41 @@ public class ALHeap {
      *****************************************************/
     public Integer removeMin() 
     {
-	return _heap.remove(0);
+	Integer min = _heap.get(0);
+	swap(0, _heap.size()-1);
+	_heap.remove(_heap.size()-1);
+
+	int i=0;
+	while( 2*i+1<_heap.size() ) {
+	    if( 2*i+2<_heap.size() ) {
+		int m = _heap.get(2*i+2);
+		int mi = 2*i+2;
+		if( _heap.get(2*i+1) < _heap.get(2*i+2) ) {
+		    m = _heap.get(2*i+1);
+		    mi--;
+		}
+		
+		if( _heap.get(i) > min ) {
+		    swap( mi, i );
+		    i=mi;
+		}
+		else {
+		    break;
+		}
+	    }
+	    else {
+		if( _heap.get(i) > _heap.get(2*i+1) ) {
+		    swap(i, 2*i+1);
+		    i=2*i+1;
+		}
+		else {
+		    break;
+		}
+	    }
+	}
+
+	return min;
+	    
     }//O(?)
 
 
@@ -158,7 +192,6 @@ public class ALHeap {
 	  System.out.println(pile);
 	  pile.add(9);
 	  System.out.println(pile);
-	/*--V--------------MOVE ME DOWN------------------V---
 
 	  System.out.println("removing " + pile.removeMin() + "...");
 	  System.out.println(pile);
@@ -182,6 +215,7 @@ public class ALHeap {
 	  System.out.println(pile);
 	  System.out.println("removing " + pile.removeMin() + "...");
 	  System.out.println(pile);
+	/*--V--------------MOVE ME DOWN------------------V---
 
 	  ==|============================================|===*/
 
